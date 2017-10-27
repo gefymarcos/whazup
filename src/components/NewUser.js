@@ -4,16 +4,33 @@ import {
   TextInput,
   StyleSheet
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import Button from './commons/Button';
 
-export default props => (
+const NewUser = props => (
   <View style={styles.container}>
     <View style={styles.principal}>
-      <TextInput style={styles.input} placeholder='Nome' />
-      <TextInput style={styles.input} placeholder='E-mail' />
-      <TextInput style={styles.input} placeholder='Senha' />
-      <TextInput style={styles.input} placeholder='Confirmar Senha' />
+      <TextInput
+        style={styles.input}
+        placeholder='Nome'
+        value={props.nome}
+      />
+      <TextInput 
+        style={styles.input} 
+        placeholder='E-mail' 
+        value={props.email}
+      />
+      <TextInput 
+        style={styles.input} 
+        placeholder='Senha' 
+        value={props.senha}
+      />
+      <TextInput 
+        style={styles.input} 
+        placeholder='Confirmar Senha' 
+        value={props.senha}
+      />
     </View>
     <View style={styles.footer}>
       <Button 
@@ -22,6 +39,14 @@ export default props => (
       />
     </View>
   </View>
+);
+
+const mapStateToProps = state => (
+  {
+    nome: state.auth.nome,
+    email: state.auth.email,
+    senha: state.auth.senha,
+  }
 );
 
 const styles = StyleSheet.create({
@@ -46,3 +71,5 @@ const styles = StyleSheet.create({
     marginTop: 180,
   }
 });
+
+export default connect(mapStateToProps, null)(NewUser);
