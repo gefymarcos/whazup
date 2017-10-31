@@ -5,5 +5,6 @@ export default props => (
   <Button 
     title={props.title}
     color={props.color}
+    onPress={() => props.onPress}
   />
 );

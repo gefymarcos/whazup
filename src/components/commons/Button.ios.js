@@ -6,7 +6,7 @@ export default props => (
     <Button 
       title={props.title}
       color='#fafafa'
-      onPress={() => false}
+      onPress={() => props.onPress()}
     />
   </View>
 );
