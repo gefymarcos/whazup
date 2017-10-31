@@ -22,7 +22,7 @@ class Login extends Component {
   renderBtn() {
     if(this.props.authLoading){
       return (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       )
     }
     return(

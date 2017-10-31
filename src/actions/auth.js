@@ -9,7 +9,8 @@ import {
   ADD_USER_ERROR,
   AUTH_USER_SUCCESS,
   AUTH_USER_ERROR,
-  LOGIN_INITIATED
+  LOGIN_INITIATED,
+  USER_LOADING
  } from '../actions/types';
 
 export const modifyEmail = (text) => {
@@ -35,6 +36,9 @@ export const modifyName = (text) => {
 
 export const addUser = ({ nome, email, senha }) => { 
   return dispatch => {
+
+    dispatch({ type: USER_LOADING });
+
     firebase.auth().createUserWithEmailAndPassword(email, senha)
     .then(user => {
       let emailB64 = b64.encode(email);

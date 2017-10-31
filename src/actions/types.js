@@ -7,3 +7,4 @@ export const ADD_USER_ERROR = 'add_user_error';
 export const AUTH_USER_SUCCESS = 'auth_user_success';
 export const AUTH_USER_ERROR = 'auth_user_error';
 export const LOGIN_INITIATED = 'login_initiated';
+export const USER_LOADING = 'userLoading';

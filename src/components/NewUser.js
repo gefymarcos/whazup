@@ -4,7 +4,8 @@ import {
   TextInput,
   StyleSheet,
   ImageBackground,
-  Text
+  Text,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { 
@@ -17,6 +18,21 @@ import {
 import Button from './commons/Button';
 
 class NewUser extends Component {
+
+  renderBtn() {
+    if(this.props.userLoading){
+      return (
+        <ActivityIndicator size="large" />
+      )
+    }
+    return(
+      <Button 
+        title='Cadastrar'
+        color='#3F51B5'
+        onPress={() => this._addUser()}
+      />
+    );
+  }
 
   _addUser() {
     const { nome, email, senha } = this.props;
@@ -62,11 +78,7 @@ class NewUser extends Component {
             </Text>
           </View>
           <View style={styles.footer}>
-            <Button 
-              title='Cadastrar'
-              color='#3F51B5'
-              onPress={() => this._addUser()}
-            />
+            {this.renderBtn()}
           </View>
         </View>
       </ImageBackground>
@@ -79,7 +91,8 @@ const mapStateToProps = state => (
     nome: state.auth.nome,
     email: state.auth.email,
     senha: state.auth.senha,
-    error: state.auth.newUserError
+    error: state.auth.newUserError,
+    userLoading: state.auth.userLoading
   }
 );
 
