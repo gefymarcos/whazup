@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-
+import { modifyEmail, modifyPassword } from '../actions/auth';
 import Button from './commons/Button';
 
 const Login = props => {
@@ -22,11 +22,13 @@ const Login = props => {
           style={styles.input} 
           placeholder='E-mail' 
           value={props.email}
+          onChangeText={text => props.modifyEmail(text)}
         />
         <TextInput 
           style={styles.input} 
           placeholder='Senha' 
           value={props.senha}
+          onChangeText={text => props.modifyPassword(text)}
         />
       </View>
       <View style={styles.footer}>
@@ -81,4 +83,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, null)(Login);
+export default connect(mapStateToProps, { modifyEmail, modifyPassword })(Login);
