@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import Button from './commons/Button';
 
@@ -17,7 +18,7 @@ export default props => (
       <Button 
         title='Entrar'
         color='#3F51B5'
-        onPress={() => false}
+        onPress={() => Actions.login()}
       />
       </View>
     </View>
