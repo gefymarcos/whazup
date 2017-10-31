@@ -4,6 +4,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Welcome from './components/Welcome';
+import Main from './components/Main';
 
 export default props => (
   <Router>
@@ -22,6 +23,11 @@ export default props => (
         key='welcome'
         component={Welcome}
         title='Bem Vindo'
+      />
+      <Scene
+        key='main'
+        component={Main}
+        title='Whazup!'
       />
     </Scene>
   </Router>

@@ -63,6 +63,8 @@ const authUserSuccess = (dispatch) => {
   dispatch({
     type: 'auth_user_success'
   });
+
+  Actions.main();
 }
 
 const authUserError = (error, dispatch) => {
