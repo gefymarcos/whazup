@@ -5,7 +5,8 @@ import {
   TextInput,
   StyleSheet,
   TouchableHighlight,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -16,6 +17,21 @@ class Login extends Component {
   _authUser() {
     const { email, senha } = this.props;
     this.props.authUser({ email, senha });
+  }
+
+  renderBtn() {
+    if(this.props.authLoading){
+      return (
+        <ActivityIndicator />
+      )
+    }
+    return(
+      <Button
+        title='Entrar' 
+        color='#3F51B5'
+        onPress={() => this._authUser()}
+      />
+    );
   }
 
   render() {
@@ -46,11 +62,7 @@ class Login extends Component {
             </Text>
           </View>
           <View style={styles.footer}>
-            <Button
-              title='Entrar' 
-              color='#3F51B5'
-              onPress={() => this._authUser()}
-            />
+            {this.renderBtn()}
           </View>
           <View>
             <TouchableHighlight onPress={() => Actions.newUser()}>
@@ -67,7 +79,8 @@ const mapStateToProps = state => (
   {
     email: state.auth.email,
     senha: state.auth.senha,
-    error: state.auth.authError
+    error: state.auth.authError,
+    authLoading: state.auth.authLoading
   }
 );
 

@@ -5,7 +5,8 @@ import {
   ADD_USER_SUCCESS,
   ADD_USER_ERROR,
   AUTH_USER_SUCCESS,
-  AUTH_USER_ERROR
+  AUTH_USER_ERROR,
+  LOGIN_INITIATED
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
   email: '',
   senha: '',
   newUserError: '',
-  authError: ''
+  authError: '',
+  authLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,9 +32,11 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_USER_SUCCESS:
       return { ...state, nome: '', senha: '' }
     case AUTH_USER_SUCCESS:
-      return { ...state }
+      return { ...state}
     case AUTH_USER_ERROR:
-      return { ...state, authError: action.payload}
+      return { ...state, authError: action.payload, authLoading: false}
+    case LOGIN_INITIATED:
+      return { ...state, authLoading: true}
     default:
       return state
   }

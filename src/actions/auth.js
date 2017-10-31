@@ -8,7 +8,8 @@ import {
   ADD_USER_SUCCESS,
   ADD_USER_ERROR,
   AUTH_USER_SUCCESS,
-  AUTH_USER_ERROR
+  AUTH_USER_ERROR,
+  LOGIN_INITIATED
  } from '../actions/types';
 
 export const modifyEmail = (text) => {
@@ -62,6 +63,9 @@ const addUserError = (error, dispatch) => {
 
 export const authUser = ({ email, senha }) => {
   return dispatch => {
+
+    dispatch({ type: LOGIN_INITIATED })
+
     firebase.auth().signInWithEmailAndPassword(email, senha)
     .then(result => authUserSuccess(dispatch))
     .catch(err => authUserError(err, dispatch));
