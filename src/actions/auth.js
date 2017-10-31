@@ -22,13 +22,22 @@ export const modifyName = (text) => {
 }
 
 export const addUser = ({ nome, email, senha }) => { 
-  firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => console.log(user))
-    .catch(err => console.log(err));
-
-  return {
-    type: 'add_user',
-    payload: nome
+  return dispatch => {
+    firebase.auth().createUserWithEmailAndPassword(email, senha)
+    .then(user => addUserSuccess(dispatch))
+    .catch(err => addUserError(err, dispatch));
   }
 }
 
+const addUserSuccess = (dispatch) => {
+  dispatch ({
+    type: 'success'
+  }) 
+}
+
+const addUserError = (error, dispatch) => {
+  dispatch({
+    type: 'add_user_error',
+    payload: error.message
+  })
+}

@@ -3,7 +3,8 @@ import {
   View,
   TextInput,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import { 
@@ -56,6 +57,9 @@ class NewUser extends Component {
               placeholderTextColor={'#dcdcdc'}
               value={this.props.senha}
             />
+            <Text style={styles.errorMessage}>
+              {this.props.error}
+            </Text>
           </View>
           <View style={styles.footer}>
             <Button 
@@ -75,6 +79,7 @@ const mapStateToProps = state => (
     nome: state.auth.nome,
     email: state.auth.email,
     senha: state.auth.senha,
+    error: state.auth.error
   }
 );
 
@@ -106,6 +111,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
     marginTop: 180,
+  },
+  errorMessage: {
+    fontSize: 20,
+    backgroundColor: 'transparent',
+    color: '#ff4444',
+    paddingTop: 10,
+    fontWeight: '700'
   }
 });
 
