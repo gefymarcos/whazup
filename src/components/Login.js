@@ -26,6 +26,7 @@ const Login = props => {
         />
         <TextInput 
           style={styles.input} 
+          secureTextEntry
           placeholder='Senha' 
           value={props.senha}
           onChangeText={text => props.modifyPassword(text)}

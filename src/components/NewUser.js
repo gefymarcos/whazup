@@ -5,6 +5,7 @@ import {
   StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
+import { modifyEmail, modifyPassword, modifyName } from '../actions/auth';
 
 import Button from './commons/Button';
 
@@ -15,19 +16,24 @@ const NewUser = props => (
         style={styles.input}
         placeholder='Nome'
         value={props.nome}
+        onChangeText={text => props.modifyName(text)}
       />
       <TextInput 
         style={styles.input} 
         placeholder='E-mail' 
         value={props.email}
+        onChangeText={text => props.modifyEmail(text)}
       />
       <TextInput 
         style={styles.input} 
+        secureTextEntry
         placeholder='Senha' 
         value={props.senha}
+        onChangeText={text => props.modifyPassword(text)}
       />
       <TextInput 
         style={styles.input} 
+        secureTextEntry
         placeholder='Confirmar Senha' 
         value={props.senha}
       />
@@ -72,4 +78,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, null)(NewUser);
+export default connect(mapStateToProps, { modifyEmail, modifyPassword, modifyName })(NewUser);

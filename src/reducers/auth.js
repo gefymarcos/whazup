@@ -10,7 +10,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, email: action.payload }
     case 'modify_pass':
       return { ...state, senha: action.payload }
-
+    case 'modify_name':
+      return { ...state, nome: action.payload }
     default:
       break;
   }
