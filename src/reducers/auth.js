@@ -1,3 +1,13 @@
+import {
+  MODIFY_EMAIL,
+  MODIFY_PASS,
+  MODIFY_NAME,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR,
+  AUTH_USER_SUCCESS,
+  AUTH_USER_ERROR
+ } from '../actions/types';
+
 const INITIAL_STATE = {
   nome: '',
   email: '',
@@ -9,22 +19,21 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   console.log(action);
   switch (action.type) {
-    case 'modify_email':
+    case MODIFY_EMAIL:
       return { ...state, email: action.payload }
-    case 'modify_pass':
+    case MODIFY_PASS:
       return { ...state, senha: action.payload }
-    case 'modify_name':
+    case MODIFY_NAME:
       return { ...state, nome: action.payload }
-    case 'add_user_error':
+    case ADD_USER_ERROR:
       return { ...state, newUserError: action.payload }
-    case 'add_user_success':
+    case ADD_USER_SUCCESS:
       return { ...state, nome: '', senha: '' }
-    case 'auth_user_success':
+    case AUTH_USER_SUCCESS:
       return { ...state }
-    case 'auth_user_error':
+    case AUTH_USER_ERROR:
       return { ...state, authError: action.payload}
     default:
-      break;
+      return state
   }
-  return state;
 };

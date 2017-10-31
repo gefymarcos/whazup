@@ -1,24 +1,33 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import b64 from 'base-64';
+import {
+  MODIFY_EMAIL,
+  MODIFY_PASS,
+  MODIFY_NAME,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR,
+  AUTH_USER_SUCCESS,
+  AUTH_USER_ERROR
+ } from '../actions/types';
 
 export const modifyEmail = (text) => {
   return {
-    type: 'modify_email',
+    type: MODIFY_EMAIL,
     payload: text
   }
 }
 
 export const modifyPassword = (text) => {
   return {
-    type: 'modify_pass',
+    type: MODIFY_PASS,
     payload: text
   }
 }
 
 export const modifyName = (text) => {
   return {
-    type: 'modify_name',
+    type: MODIFY_NAME,
     payload: text
   }
 }
@@ -39,14 +48,14 @@ export const addUser = ({ nome, email, senha }) => {
 
 const addUserSuccess = (dispatch) => {
   dispatch ({
-    type: 'add_user_success'
+    type: ADD_USER_SUCCESS
   });
   Actions.welcome(); 
 }
 
 const addUserError = (error, dispatch) => {
   dispatch({
-    type: 'add_user_error',
+    type: ADD_USER_ERROR,
     payload: error.message
   })
 }
@@ -61,7 +70,7 @@ export const authUser = ({ email, senha }) => {
 
 const authUserSuccess = (dispatch) => {
   dispatch({
-    type: 'auth_user_success'
+    type: AUTH_USER_SUCCESS
   });
 
   Actions.main();
@@ -69,7 +78,7 @@ const authUserSuccess = (dispatch) => {
 
 const authUserError = (error, dispatch) => {
   dispatch({
-    type: 'auth_user_error',
+    type: AUTH_USER_ERROR,
     payload: error.message
   });
 }
