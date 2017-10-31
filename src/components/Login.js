@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   View,
   Text,
@@ -9,53 +9,65 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { modifyEmail, modifyPassword } from '../actions/auth';
+import { modifyEmail, modifyPassword, authUser } from '../actions/auth';
 import Button from './commons/Button';
 
-const Login = props => {
-  return (
-    <ImageBackground style={styles.background} source={require('../imgs/bg.jpg')}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Whazup!</Text>
+class Login extends Component {
+  _authUser() {
+    const { email, senha } = this.props;
+    this.props.authUser({ email, senha });
+  }
+
+  render() {
+    return (
+      <ImageBackground style={styles.background} source={require('../imgs/bg.jpg')}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Whazup!</Text>
+          </View>
+          <View style={styles.principal}>
+            <TextInput 
+              style={styles.input} 
+              placeholder='E-mail'
+              placeholderTextColor={'#dcdcdc'}
+              value={this.props.email}
+              onChangeText={text => this.props.modifyEmail(text)}
+            />
+            <TextInput 
+              style={styles.input} 
+              secureTextEntry
+              placeholder='Senha' 
+              placeholderTextColor={'#dcdcdc'}
+              value={this.props.senha}
+              onChangeText={text => this.props.modifyPassword(text)}
+            />
+            <Text style={styles.errorMessage}>
+              {this.props.error}
+            </Text>
+          </View>
+          <View style={styles.footer}>
+            <Button
+              title='Entrar' 
+              color='#3F51B5'
+              onPress={() => this._authUser()}
+            />
+          </View>
+          <View>
+            <TouchableHighlight onPress={() => Actions.newUser()}>
+              <Text style={styles.footerText}>Cadastre-se no Whazup!</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-        <View style={styles.principal}>
-          <TextInput 
-            style={styles.input} 
-            placeholder='E-mail'
-            placeholderTextColor={'#dcdcdc'}
-            value={props.email}
-            onChangeText={text => props.modifyEmail(text)}
-          />
-          <TextInput 
-            style={styles.input} 
-            secureTextEntry
-            placeholder='Senha' 
-            placeholderTextColor={'#dcdcdc'}
-            value={props.senha}
-            onChangeText={text => props.modifyPassword(text)}
-          />
-        </View>
-        <View style={styles.footer}>
-          <Button
-            title='Entrar' 
-            color='#3F51B5'
-          />
-        </View>
-        <View>
-          <TouchableHighlight onPress={() => Actions.newUser()}>
-            <Text style={styles.footerText}>Cadastre-se no Whazup!</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-    </ImageBackground>
-  );
-};
+      </ImageBackground>
+    );
+  }
+}
 
 const mapStateToProps = state => (
   {
     email: state.auth.email,
     senha: state.auth.senha,
+    error: state.auth.authError
   }
 );
 
@@ -97,7 +109,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
     color: '#fafafa',
+  },
+  errorMessage: {
+    fontSize: 20,
+    backgroundColor: 'transparent',
+    color: '#ff4444',
+    paddingTop: 10,
+    fontWeight: '700'
   }
 });
 
-export default connect(mapStateToProps, { modifyEmail, modifyPassword })(Login);
+export default connect(mapStateToProps, 
+  { 
+    modifyEmail, 
+    modifyPassword, 
+    authUser 
+  }
+)(Login);

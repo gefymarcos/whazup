@@ -50,3 +50,25 @@ const addUserError = (error, dispatch) => {
     payload: error.message
   })
 }
+
+export const authUser = ({ email, senha }) => {
+  return dispatch => {
+    firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then(result => authUserSuccess(dispatch))
+    .catch(err => authUserError(err, dispatch));
+  }  
+}
+
+const authUserSuccess = (dispatch) => {
+  dispatch({
+    type: 'auth_user_success'
+  });
+}
+
+const authUserError = (error, dispatch) => {
+  dispatch({
+    type: 'auth_user_error',
+    payload: error.message
+  });
+}
+ 

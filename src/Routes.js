@@ -22,7 +22,6 @@ export default props => (
         key='welcome'
         component={Welcome}
         title='Bem Vindo'
-        initial
       />
     </Scene>
   </Router>

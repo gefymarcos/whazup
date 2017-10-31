@@ -79,7 +79,7 @@ const mapStateToProps = state => (
     nome: state.auth.nome,
     email: state.auth.email,
     senha: state.auth.senha,
-    error: state.auth.error
+    error: state.auth.newUserError
   }
 );
 
