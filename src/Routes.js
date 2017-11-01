@@ -35,6 +35,7 @@ export default props => (
         key='main'
         component={Main}
         title='Whazup!'
+        initial
       />
     </Scene>
   </Router>
