@@ -5,6 +5,7 @@ import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Welcome from './components/Welcome';
 import Main from './components/Main';
+import AddContact from './components/AddContact';
 
 export default props => (
   <Router 
@@ -35,7 +36,12 @@ export default props => (
         key='main'
         component={Main}
         title='Whazup!'
-        initial
+      />
+      <Scene
+        hideNavBar={false}
+        key='addContact'
+        component={AddContact}
+        title='Adicionar Contato'
       />
     </Scene>
   </Router>

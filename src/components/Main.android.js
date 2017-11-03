@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import TabBarMenu from './commons/TabBarMenu';
 
-const Conversas = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
-const Contatos = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
+import Contacts from './Contacts';
+import Talks from './Talks';
 
 export default class Main extends Component {
   state = {
@@ -16,11 +17,11 @@ export default class Main extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderHeader = props => <TabBar {...props} />;
+  _renderHeader = props => <TabBarMenu {...props} />;
 
   _renderScene = SceneMap({
-    '1': Conversas,
-    '2': Contatos,
+    '1': Talks,
+    '2': Contacts,
   });
 
   render() {
@@ -38,6 +39,6 @@ export default class Main extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
 });

@@ -17,7 +17,7 @@ export default class Main extends Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderHeader = props => <TabBarMenu {...props} />;
+  _renderFooter = props => <TabBarMenu {...props} />;
 
   _renderScene = SceneMap({
     '1': Talks,
@@ -30,7 +30,7 @@ export default class Main extends Component {
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
+        renderFooter={this._renderFooter}
         onIndexChange={this._handleIndexChange}
       />
     );
@@ -39,6 +39,6 @@ export default class Main extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
 });
