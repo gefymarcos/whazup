@@ -3,7 +3,8 @@ import firebase from 'firebase';
 import _ from 'lodash';
 import {
   MODIFY_ADD_CONTACT,
-  ADD_CONTACT_ERROR
+  ADD_CONTACT_ERROR,
+  ADD_CONTACT_SUCCESS
 } from './types';
 
 export const modifyAddContactEmail = text => {
@@ -29,7 +30,7 @@ export const addContact = email => {
                   email, 
                   nome: dadosUsuario.nome
                 })
-                .then(() => console.log('success'))
+                .then(() => addContactSuccess(dispatch))
                 .catch((err) => addContactError(err.message, dispatch));
             } else {
               dispatch({
@@ -48,4 +49,18 @@ const addContactError = (error, dispatch) => (
     type: ADD_CONTACT_ERROR,
     payload: error
   })
+);
+
+const addContactSuccess = dispatch => (
+  dispatch({
+    type: ADD_CONTACT_SUCCESS,
+    payload: true
+  })
+);
+
+export const newIncludeContact = () => (
+  {
+    type: ADD_CONTACT_SUCCESS,
+    payload: false
+  } 
 );

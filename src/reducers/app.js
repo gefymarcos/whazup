@@ -6,7 +6,8 @@ import {
 
 const INITIAL_STATE = {
   addContactEmail: '',
-  errorAddContact: ''
+  errorAddContact: '',
+  successAddContact: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_CONTACT_ERROR:
       return { ...state, errorAddContact: action.payload };
     case ADD_CONTACT_SUCCESS:
-      return { ...state, errorAddContact: action.payload };
+      return { ...state, successAddContact: action.payload, addContactEmail: '' };
     default:
       return state;
   }

@@ -2,8 +2,10 @@ import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { newIncludeContact } from '../../actions/app';
 
-export default props => (
+const TabBarMenu = props => (
   <View style={styles.container}>
     <TabBar 
       {...props} 
@@ -12,7 +14,10 @@ export default props => (
     />
     <View style={styles.addUser}>
       <TouchableHighlight 
-        onPress={() => Actions.addContact()}
+        onPress={() => { 
+          Actions.addContact(); 
+          props.newIncludeContact();
+        }}
         underlayColor='#2b387c'
       >
         <Image source={require('../../imgs/addUser.png')} />
@@ -24,6 +29,8 @@ export default props => (
     </View>
   </View>
 );
+
+export default connect(null, { newIncludeContact })(TabBarMenu);
 
 const styles = StyleSheet.create({
   container: {

@@ -12,3 +12,4 @@ export const USER_LOADING = 'userLoading';
 export const MODIFY_ADD_CONTACT = 'modify_add_contact';
 export const ADD_CONTACT_ERROR = 'add_contact_error';
 export const ADD_CONTACT_SUCCESS = 'add_contact_success';
+export const NEW_INCLUDE_CONTACT = 'new_include_contact';
