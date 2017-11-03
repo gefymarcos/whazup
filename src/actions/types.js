@@ -10,3 +10,5 @@ export const LOGIN_INITIATED = 'login_initiated';
 export const USER_LOADING = 'userLoading';
 // App
 export const MODIFY_ADD_CONTACT = 'modify_add_contact';
+export const ADD_CONTACT_ERROR = 'add_contact_error';
+export const ADD_CONTACT_SUCCESS = 'add_contact_success';

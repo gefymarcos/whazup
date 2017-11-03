@@ -23,7 +23,7 @@ const AddContact = props => (
         onPress={() => props.addContact(props.addContactEmail)}
       />
       <ErrorMessage 
-        error={this.props.error} 
+        error={props.error} 
       />
     </View>
   </View>
@@ -31,7 +31,8 @@ const AddContact = props => (
 
 const mapStateToProps = state => (
   {
-    addContactEmail: state.app.addContactEmail
+    addContactEmail: state.app.addContactEmail,
+    error: state.app.errorAddContact
   }
 );
 
