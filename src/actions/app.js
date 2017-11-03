@@ -30,7 +30,7 @@ export const addContact = email => {
                   nome: dadosUsuario.nome
                 })
                 .then(() => console.log('success'))
-                .catch((err) => console.log(err));
+                .catch((err) => addContactError(err.message, dispatch));
             } else {
               dispatch({
                 type: ADD_CONTACT_ERROR,
@@ -43,3 +43,9 @@ export const addContact = email => {
   };
 };
 
+const addContactError = (error, dispatch) => (
+  dispatch({
+    type: ADD_CONTACT_ERROR,
+    payload: error
+  })
+);
