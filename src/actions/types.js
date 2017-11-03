@@ -8,3 +8,5 @@ export const AUTH_USER_SUCCESS = 'auth_user_success';
 export const AUTH_USER_ERROR = 'auth_user_error';
 export const LOGIN_INITIATED = 'login_initiated';
 export const USER_LOADING = 'userLoading';
+// App
+export const MODIFY_ADD_CONTACT = 'modify_add_contact';

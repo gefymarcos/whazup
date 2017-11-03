@@ -21,27 +21,26 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
     case MODIFY_EMAIL:
-      return { ...state, email: action.payload }
+      return { ...state, email: action.payload };
     case MODIFY_PASS:
-      return { ...state, senha: action.payload }
+      return { ...state, senha: action.payload };
     case MODIFY_NAME:
-      return { ...state, nome: action.payload }
+      return { ...state, nome: action.payload };
     case ADD_USER_ERROR:
-      return { ...state, newUserError: action.payload, userLoading: false }
+      return { ...state, newUserError: action.payload, userLoading: false };
     case ADD_USER_SUCCESS:
-      return { ...state, nome: '', senha: '', userLoading: false, newUserError: '' }
+      return { ...state, nome: '', senha: '', userLoading: false, newUserError: '' };
     case AUTH_USER_SUCCESS:
-      return { ...state}
+      return { ...state };
     case AUTH_USER_ERROR:
-      return { ...state, authError: action.payload, authLoading: false }
+      return { ...state, authError: action.payload, authLoading: false };
     case LOGIN_INITIATED:
-      return { ...state, authLoading: true }
+      return { ...state, authLoading: true };
     case USER_LOADING:
-      return { ...state, userLoading: true }
+      return { ...state, userLoading: true };
     default:
-      return state
+      return state;
   }
 };

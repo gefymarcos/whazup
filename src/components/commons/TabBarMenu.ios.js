@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StatusBar, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
-import { Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
 
 export default props => (
   <View style={styles.container}>
-    <TabBar {...props} 
+    <TabBar 
+      {...props} 
       style={styles.tabs} 
-      indicatorStyle={{height: 0}}
+      indicatorStyle={{ height: 0 }}
     />
     <View style={styles.addUser}>
       <TouchableHighlight 
-        onPress={() => Actions.addContact() }
+        onPress={() => Actions.addContact()}
         underlayColor='#2b387c'
       >
         <Image source={require('../../imgs/addUser.png')} />

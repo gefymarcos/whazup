@@ -19,24 +19,24 @@ import Button from './commons/Button';
 
 class NewUser extends Component {
 
+  _addUser() {
+    const { nome, email, senha } = this.props;
+    this.props.addUser({ nome, email, senha });
+  }
+
   renderBtn() {
-    if(this.props.userLoading){
+    if (this.props.userLoading) {
       return (
         <ActivityIndicator size="large" />
-      )
+      );
     }
-    return(
+    return (
       <Button 
         title='Cadastrar'
         color='#3F51B5'
         onPress={() => this._addUser()}
       />
     );
-  }
-
-  _addUser() {
-    const { nome, email, senha } = this.props;
-    this.props.addUser({ nome, email, senha });
   }
 
   render() {

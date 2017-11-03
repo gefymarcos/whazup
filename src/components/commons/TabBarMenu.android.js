@@ -25,9 +25,9 @@ export default props => (
         </View>
       </View>
     </View>
-    <TabBar {...props} 
+    <TabBar { ...props } 
       style={styles.tabs} 
-      indicatorStyle={{backgroundColor: '#FAFAFA', height: 5}}
+      indicatorStyle={{ backgroundColor: '#FAFAFA', height: 5 }}
     />
   </View>
 );

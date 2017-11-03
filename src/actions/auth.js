@@ -17,64 +17,62 @@ export const modifyEmail = (text) => {
   return {
     type: MODIFY_EMAIL,
     payload: text
-  }
-}
+  };
+};
 
 export const modifyPassword = (text) => {
   return {
     type: MODIFY_PASS,
     payload: text
-  }
-}
+  };
+};
 
 export const modifyName = (text) => {
   return {
     type: MODIFY_NAME,
     payload: text
-  }
-}
+  };
+};
 
 export const addUser = ({ nome, email, senha }) => { 
   return dispatch => {
-
     dispatch({ type: USER_LOADING });
 
     firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => {
-      let emailB64 = b64.encode(email);
+    .then(() => {
+      const emailB64 = b64.encode(email);
 
       firebase.database().ref(`/contatos/${emailB64}`)
         .push({ nome })
-        .then(value => addUserSuccess(dispatch));
+        .then(() => addUserSuccess(dispatch));
     })
     .catch(err => addUserError(err, dispatch));
-  }
-}
+  };
+};
 
 const addUserSuccess = (dispatch) => {
-  dispatch ({
+  dispatch({
     type: ADD_USER_SUCCESS
   });
   Actions.welcome(); 
-}
+};
 
 const addUserError = (error, dispatch) => {
   dispatch({
     type: ADD_USER_ERROR,
     payload: error.message
-  })
-}
+  });
+};
 
 export const authUser = ({ email, senha }) => {
   return dispatch => {
-
-    dispatch({ type: LOGIN_INITIATED })
+    dispatch({ type: LOGIN_INITIATED });
 
     firebase.auth().signInWithEmailAndPassword(email, senha)
-    .then(result => authUserSuccess(dispatch))
+    .then(() => authUserSuccess(dispatch))
     .catch(err => authUserError(err, dispatch));
-  }  
-}
+  };
+};
 
 const authUserSuccess = (dispatch) => {
   dispatch({
@@ -82,12 +80,11 @@ const authUserSuccess = (dispatch) => {
   });
 
   Actions.main();
-}
+};
 
 const authUserError = (error, dispatch) => {
   dispatch({
     type: AUTH_USER_ERROR,
     payload: error.message
   });
-}
- 
+};

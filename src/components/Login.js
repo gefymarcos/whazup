@@ -20,12 +20,12 @@ class Login extends Component {
   }
 
   renderBtn() {
-    if(this.props.authLoading){
+    if (this.props.authLoading) {
       return (
         <ActivityIndicator size="large" />
-      )
+      );
     }
-    return(
+    return (
       <Button
         title='Entrar' 
         color='#3F51B5'
