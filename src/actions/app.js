@@ -1,5 +1,6 @@
 import B64 from 'base-64';
 import firebase from 'firebase';
+import _ from 'lodash';
 import {
   MODIFY_ADD_CONTACT,
   ADD_CONTACT_ERROR
@@ -20,13 +21,13 @@ export const addContact = email => {
         .once('value')
         .then(snapshot => {
             if (snapshot.val()) {
-              console.log(email);
+              const dadosUsuario = _.first(_.values(snapshot.val()));
               const { currentUser } = firebase.auth();
               const emailUser64 = B64.encode(currentUser.email);
               firebase.database().ref(`/userContacts/${emailUser64}`)
                 .push({ 
                   email, 
-                  nome: 'nome'
+                  nome: dadosUsuario.nome
                 })
                 .then(() => console.log('success'))
                 .catch((err) => console.log(err));
