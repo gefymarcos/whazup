@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Button from '../components/commons/Button';
 import { modifyAddContactEmail, addContact } from '../actions/app';
+import ErrorMessage from '../components/commons/ErrorMessage';
 
 const AddContact = props => (
   <View style={styles.container}>
@@ -20,6 +21,9 @@ const AddContact = props => (
         title='Adicionar'
         color='#3F51B5'
         onPress={() => props.addContact(props.addContactEmail)}
+      />
+      <ErrorMessage 
+        error={this.props.error} 
       />
     </View>
   </View>

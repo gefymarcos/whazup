@@ -4,7 +4,6 @@ import {
   TextInput,
   StyleSheet,
   ImageBackground,
-  Text,
   ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -14,7 +13,7 @@ import {
   modifyName, 
   addUser 
 } from '../actions/auth';
-
+import ErrorMessage from './commons/ErrorMessage';
 import Button from './commons/Button';
 
 class NewUser extends Component {
@@ -73,9 +72,9 @@ class NewUser extends Component {
               placeholderTextColor={'#dcdcdc'}
               value={this.props.senha}
             />
-            <Text style={styles.errorMessage}>
-              {this.props.error}
-            </Text>
+            <ErrorMessage
+              error={this.props.error}
+            />
           </View>
           <View style={styles.footer}>
             {this.renderBtn()}
@@ -124,13 +123,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
     marginTop: 180,
-  },
-  errorMessage: {
-    fontSize: 20,
-    backgroundColor: 'transparent',
-    color: '#ff4444',
-    paddingTop: 10,
-    fontWeight: '700'
   }
 });
 

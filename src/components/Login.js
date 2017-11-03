@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { modifyEmail, modifyPassword, authUser } from '../actions/auth';
 import Button from './commons/Button';
+import ErrorMessage from './commons/ErrorMessage';
 
 class Login extends Component {
   _authUser() {
@@ -57,9 +58,9 @@ class Login extends Component {
               value={this.props.senha}
               onChangeText={text => this.props.modifyPassword(text)}
             />
-            <Text style={styles.errorMessage}>
-              {this.props.error}
-            </Text>
+            <ErrorMessage
+              error={this.props.error}
+            />
           </View>
           <View style={styles.footer}>
             {this.renderBtn()}
@@ -122,13 +123,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
     color: '#fafafa',
-  },
-  errorMessage: {
-    fontSize: 20,
-    backgroundColor: 'transparent',
-    color: '#ff4444',
-    paddingTop: 10,
-    fontWeight: '700'
   }
 });
 
