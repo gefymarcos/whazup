@@ -6,42 +6,46 @@ import { fetchContactsUser } from '../actions/app';
 
 class Contacts extends Component {
 
-  constructor(props) {
-    super(props);
-    
+  componentWillMount() {
+    this.props.fetchContactsUser();
+    this.createData(this.props.contacts);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createData(nextProps.contacts);
+  }
+
+  createData(contacts) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    this.state = {
-      data: ds.cloneWithRows([
-        'linha 1',
-        'linha 2',
-        'linha 3',
-        'linha 4',
-      ])}
-  }
-
-  componentWillMount() {
-    this.props.fetchContactsUser();
+    this.data = ds.cloneWithRows(contacts); 
   }
 
   render() {
     return (
       <ListView
-        dataSource={this.state.data}
-        renderRow={data => <View><Text>{data}</Text></View>}
+        enableEmptySections
+        dataSource={this.data}
+        renderRow={data => 
+          <View>
+            <Text>{data.nome}</Text>
+            <Text>{data.email}</Text>
+          </View>
+        }
       />
     );
   }
 }
 
 const mapStateToProps = state => {
-  const contatos = _.map(state.contacts, (val, uid) => {
+  const contacts = _.map(state.contacts, (val, uid) => {
     return { ...val, uid };
   });
-  console.log(contatos);
-  return {};
+  return {
+    contacts
+  };
 };
 
 export default connect(mapStateToProps, { fetchContactsUser })(Contacts);
