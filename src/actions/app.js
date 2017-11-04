@@ -4,7 +4,8 @@ import _ from 'lodash';
 import {
   MODIFY_ADD_CONTACT,
   ADD_CONTACT_ERROR,
-  ADD_CONTACT_SUCCESS
+  ADD_CONTACT_SUCCESS,
+  LIST_CONTACTS_USER
 } from './types';
 
 export const modifyAddContactEmail = text => {
@@ -64,3 +65,18 @@ export const newIncludeContact = () => (
     payload: false
   } 
 );
+
+export const fetchContactsUser = () => {
+  const { currentUser } = firebase.auth();
+  
+  return (dispatch) => {
+    const emailUser64 = B64.encode(currentUser.email);
+      firebase.database().ref(`/userContacts/${emailUser64}`)
+        .on('value', snapshot => {
+          dispatch({
+            type: LIST_CONTACTS_USER,
+            payload: snapshot.val()
+          });
+        });
+  };
+};
