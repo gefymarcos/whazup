@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
 import { fetchContactsUser } from '../actions/app';
 import ListViewItem from './commons/ListViewItem';
 
@@ -24,17 +25,22 @@ class Contacts extends Component {
     this.data = ds.cloneWithRows(contacts); 
   }
 
+  renderRow(data) {
+    return (
+      <ListViewItem 
+        title={data.nome}
+        subtitle={data.email}
+        onPress={() => Actions.messages()}
+      />
+    );
+  }
+
   render() {
     return (
       <ListView
         enableEmptySections
         dataSource={this.data}
-        renderRow={data => 
-          <ListViewItem 
-            title={data.nome}
-            subtitle={data.email}
-          />
-        }
+        renderRow={this.renderRow}
       />
     );
   }

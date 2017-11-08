@@ -6,6 +6,7 @@ import NewUser from './components/NewUser';
 import Welcome from './components/Welcome';
 import Main from './components/Main';
 import AddContact from './components/AddContact';
+import Messages from './components/Messages';
 
 export default props => (
   <Router 
@@ -42,6 +43,12 @@ export default props => (
         key='addContact'
         component={AddContact}
         title='Adicionar Contato'
+      />
+      <Scene
+        hideNavBar={false}
+        key='messages'
+        component={Messages}
+        title='Mensagens'
       />
     </Scene>
   </Router>

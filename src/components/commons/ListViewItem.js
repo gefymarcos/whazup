@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
 export default props => (
-  <View style={styles.container}>
-    <Text style={styles.title}>{props.title}</Text>
-    <Text style={styles.subtitle}>{props.subtitle}</Text>
-  </View>
+  <TouchableHighlight
+    onPress={() => props.onPress()}
+  >
+    <View style={styles.container}>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.subtitle}>{props.subtitle}</Text>
+    </View>
+  </TouchableHighlight>
 );
 
 const styles = StyleSheet.create({
