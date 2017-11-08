@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ListView } from 'react-native';
+import { ListView } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { fetchContactsUser } from '../actions/app';
+import ListViewItem from './commons/ListViewItem';
 
 class Contacts extends Component {
 
@@ -29,10 +30,10 @@ class Contacts extends Component {
         enableEmptySections
         dataSource={this.data}
         renderRow={data => 
-          <View>
-            <Text>{data.nome}</Text>
-            <Text>{data.email}</Text>
-          </View>
+          <ListViewItem 
+            title={data.nome}
+            subtitle={data.email}
+          />
         }
       />
     );
