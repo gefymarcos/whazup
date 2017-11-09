@@ -90,10 +90,9 @@ export const modifyMessage = text => {
   });
 };
 
-export const sendMessage = text => {
-  console.log('teste', text);
+export const sendMessage = (message, contactName, contactEmail) => {
   return ({
     type: SEND_MESSAGE,
-    payload: text
+    payload: message
   });
 };

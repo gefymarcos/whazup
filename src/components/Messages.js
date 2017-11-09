@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { modifyMessage, sendMessage } from '../actions/app';
 
 class Messages extends Component {
+
+  _sendMessage() {
+    const { message, contactName, contactEmail } = this.props;
+    this.props.sendMessage(message, contactName, contactEmail);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -18,7 +24,7 @@ class Messages extends Component {
             onChangeText={text => this.props.modifyMessage(text)}
           />
           <TouchableHighlight
-            onPress={() => this.props.sendMessage(this.props.message)}
+            onPress={this._sendMessage.bind(this)}
             underlayColor='#fafafa'
             style={styles.button}
           >

@@ -30,7 +30,7 @@ class Contacts extends Component {
       <ListViewItem 
         title={data.nome}
         subtitle={data.email}
-        onPress={() => Actions.messages()}
+        onPress={() => Actions.messages({ title: data.nome, contactName: data.nome, contactEmail: data.email })}
       />
     );
   }
