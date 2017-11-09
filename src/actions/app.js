@@ -5,7 +5,9 @@ import {
   MODIFY_ADD_CONTACT,
   ADD_CONTACT_ERROR,
   ADD_CONTACT_SUCCESS,
-  LIST_CONTACTS_USER
+  LIST_CONTACTS_USER,
+  MODIFY_MESSAGE,
+  SEND_MESSAGE
 } from './types';
 
 export const modifyAddContactEmail = text => {
@@ -79,4 +81,19 @@ export const fetchContactsUser = () => {
           });
         });
   };
+};
+
+export const modifyMessage = text => {
+  return ({
+    type: MODIFY_MESSAGE,
+    payload: text
+  });
+};
+
+export const sendMessage = text => {
+  console.log('teste', text);
+  return ({
+    type: SEND_MESSAGE,
+    payload: text
+  });
 };

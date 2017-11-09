@@ -12,8 +12,8 @@ import {
 
 const INITIAL_STATE = {
   nome: '',
-  email: '',
-  senha: '',
+  email: 'fran_lg11@hotmail.com',
+  senha: '123456',
   newUserError: '',
   authError: '',
   authLoading: false,
