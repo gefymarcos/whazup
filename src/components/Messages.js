@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Image, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, TextInput, Image, TouchableHighlight, ListView, Text } from 'react-native';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
-import { modifyMessage, sendMessage } from '../actions/app';
+import { modifyMessage, sendMessage, userTalkFetch } from '../actions/app';
 
 class Messages extends Component {
+
+  componentWillMount() {
+    this.props.userTalkFetch(this.props.contactEmail);
+    this.createData(this.props.talk);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createData(nextProps.talk);
+  }
+
+  createData(talk) {
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r2 !== r1 });
+    this.dataSource = ds.cloneWithRows(talk);
+  }
 
   _sendMessage() {
     const { message, contactName, contactEmail } = this.props;
     this.props.sendMessage(message, contactName, contactEmail);
   }
 
+  renderRow(text) {
+    return (
+      <View>
+        <Text>{text.message}</Text>
+        <Text>{text.type}</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.stage}>
-        
+          <ListView 
+            enableEmptySections
+            dataSource={this.dataSource}
+            renderRow={this.renderRow}
+          />
         </View>
         <View style={styles.inputArea}>
           <TextInput
@@ -39,12 +67,18 @@ class Messages extends Component {
 }
 
 const mapStateToProps = state => {
+
+  const talk = _.map(state.talks, (val, uid) => {
+    return { ...val, uid };
+  });
+
   return ({
+    talk,
     message: state.app.message
   });
 };
 
-export default connect(mapStateToProps, { modifyMessage, sendMessage })(Messages);
+export default connect(mapStateToProps, { modifyMessage, sendMessage, userTalkFetch })(Messages);
 
 const styles = StyleSheet.create({
   container: {

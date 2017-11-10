@@ -139,7 +139,7 @@ export const userTalkFetch = contactEmail => {
   const userEmail64 = B64.encode(firebase.auth().currentUser.email);
 
   return dispatch => {
-    firebase.database.ref(`/messages/${userEmail64}/${contactEmail64}`)
+    firebase.database().ref(`/messages/${userEmail64}/${contactEmail64}`)
       .on('value', snapshot => {
         dispatch({
           type: LIST_TALK_USER,
