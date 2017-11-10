@@ -16,5 +16,6 @@ export const NEW_INCLUDE_CONTACT = 'new_include_contact';
 export const MODIFY_MESSAGE = 'modify_message';
 export const SEND_MESSAGE = 'send_message';
 export const LIST_TALK_USER = 'list_talk_user';
+export const LIST_TALKS_USER = 'list_talks_user';
 //Contacts
 export const LIST_CONTACTS_USER = 'list_contacts_user';

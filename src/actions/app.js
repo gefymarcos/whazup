@@ -8,7 +8,8 @@ import {
   LIST_CONTACTS_USER,
   MODIFY_MESSAGE,
   SEND_MESSAGE,
-  LIST_TALK_USER
+  LIST_TALK_USER,
+  LIST_TALKS_USER
 } from './types';
 import { 
   SEND,
@@ -143,6 +144,22 @@ export const userTalkFetch = contactEmail => {
       .on('value', snapshot => {
         dispatch({
           type: LIST_TALK_USER,
+          payload: snapshot.val()
+        });
+      });
+  };
+};
+
+export const chatsUserFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return dispatch => {
+    const userEmail64 = B64.encode(currentUser.email);
+
+    firebase.database().ref(`/user_talks/${userEmail64}`)
+      .on('value', snapshot => {
+        dispatch({
+          type: LIST_TALKS_USER,
           payload: snapshot.val()
         });
       });
