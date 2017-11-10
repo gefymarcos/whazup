@@ -14,6 +14,9 @@ class Messages extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (this.props.email !== nextProps.email) {
+      this.props.userTalkFetch(nextProps.email);
+    }
     this.createData(nextProps.talk);
   }
 
