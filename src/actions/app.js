@@ -9,6 +9,10 @@ import {
   MODIFY_MESSAGE,
   SEND_MESSAGE
 } from './types';
+import { 
+  SEND,
+  RECEIVE
+} from './status';
 
 export const modifyAddContactEmail = text => {
   return {
@@ -90,9 +94,43 @@ export const modifyMessage = text => {
   });
 };
 
-export const sendMessage = (message, contactName, contactEmail) => {
-  return ({
-    type: SEND_MESSAGE,
-    payload: message
-  });
+export const sendMessage = (message, contactName, contactEmail) => {  
+  return dispatch => {
+    const userMail = firebase.auth().currentUser.email;
+    const emailUser64 = B64.encode(userMail);
+    const emailContact64 = B64.encode(contactEmail);
+
+    firebase.database().ref(`/messages/${emailUser64}/${emailContact64}`)
+      .push({ message, type: SEND })
+      .then(() => {
+        firebase.database().ref(`/messages/${emailContact64}/${emailUser64}`)
+        .push({ message, type: RECEIVE })
+        .then(() => 
+          dispatch({
+            type: SEND_MESSAGE,
+            payload: message
+          })
+        );
+      })
+      .then(() => {
+        firebase.database().ref(`/user_talks/${emailUser64}/${emailContact64}`)
+          .set({
+            nome: contactName,
+            email: contactEmail
+          });
+      })
+      .then(() => {
+        firebase.database().ref(`/contatos/${emailUser64}`)
+          .once('value')
+          .then(snapshot => {
+            const userData = _.first(_.values(snapshot.val()));
+
+            firebase.database().ref(`/user_talks/${emailContact64}/${emailUser64}`)
+              .set({
+                nome: userData.name,
+                email: userMail
+              });
+          });
+      });
+  };
 };
