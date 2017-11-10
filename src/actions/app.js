@@ -122,12 +122,10 @@ export const sendMessage = (message, contactName, contactEmail) => {
       .then(() => {
         firebase.database().ref(`/contatos/${emailUser64}`)
           .once('value')
-          .then(snapshot => {
-            const userData = _.first(_.values(snapshot.val()));
-
+          .then(() => {
             firebase.database().ref(`/user_talks/${emailContact64}/${emailUser64}`)
               .set({
-                nome: userData.name,
+                nome: userMail,
                 email: userMail
               });
           });
