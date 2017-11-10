@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StatusBar, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
-import { Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
 
 export default props => (
   <View style={styles.container}>
@@ -21,7 +22,14 @@ export default props => (
         </TouchableHighlight>
         </View>
         <View>
+        <TouchableHighlight>
+          onPress={() => firebase.auth().signOut()
+            .then(
+              () => Actions.login()
+            )
+          }
           <Text style={styles.exit}>Sair</Text>
+        </TouchableHighlight>
         </View>
       </View>
     </View>

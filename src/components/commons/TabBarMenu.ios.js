@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 import { newIncludeContact } from '../../actions/app';
 
 const TabBarMenu = props => (
@@ -25,7 +26,14 @@ const TabBarMenu = props => (
       </TouchableHighlight>
     </View>
     <View style={styles.exit}>
-      <Image style={styles.exitImg} source={require('../../imgs/exit.png')} />
+      <TouchableHighlight>
+        onPress={() => firebase.auth().signOut()
+          .then(
+            () => Actions.login()
+          )
+        }
+        <Image style={styles.exitImg} source={require('../../imgs/exit.png')} />
+      </TouchableHighlight> 
     </View>
   </View>
 );
