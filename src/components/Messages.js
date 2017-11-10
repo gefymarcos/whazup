@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, Image, TouchableHighlight, ListView, Text } from 'react-native';
+import { View, StyleSheet, TextInput, Image, TouchableHighlight, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { modifyMessage, sendMessage, userTalkFetch } from '../actions/app';
+import MessageBox from './commons/messageBox';
 
 class Messages extends Component {
 
@@ -28,10 +29,10 @@ class Messages extends Component {
 
   renderRow(text) {
     return (
-      <View>
-        <Text>{text.message}</Text>
-        <Text>{text.type}</Text>
-      </View>
+      <MessageBox 
+        message={text.message}
+        type={text.type}
+      />
     );
   }
 
