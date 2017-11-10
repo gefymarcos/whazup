@@ -7,7 +7,8 @@ import {
   ADD_CONTACT_SUCCESS,
   LIST_CONTACTS_USER,
   MODIFY_MESSAGE,
-  SEND_MESSAGE
+  SEND_MESSAGE,
+  LIST_TALK_USER
 } from './types';
 import { 
   SEND,
@@ -129,6 +130,21 @@ export const sendMessage = (message, contactName, contactEmail) => {
                 email: userMail
               });
           });
+      });
+  };
+};
+
+export const userTalkFetch = contactEmail => {
+  const contactEmail64 = B64.encode(contactEmail);
+  const userEmail64 = B64.encode(firebase.auth().currentUser.email);
+
+  return dispatch => {
+    firebase.database.ref(`/messages/${userEmail64}/${contactEmail64}`)
+      .on('value', snapshot => {
+        dispatch({
+          type: LIST_TALK_USER,
+          payload: snapshot.val()
+        });
       });
   };
 };
