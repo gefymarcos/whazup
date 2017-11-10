@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
     case MODIFY_MESSAGE:
       return { ...state, message: action.payload };
     case SEND_MESSAGE:
-      return { ...state, message: action.payload };
+      return { ...state, message: '' };
     default:
       return state;
   }
