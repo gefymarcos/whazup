@@ -26,12 +26,13 @@ const TabBarMenu = props => (
       </TouchableHighlight>
     </View>
     <View style={styles.exit}>
-      <TouchableHighlight>
+      <TouchableHighlight
         onPress={() => firebase.auth().signOut()
           .then(
             () => Actions.login()
           )
         }
+      >
         <Image style={styles.exitImg} source={require('../../imgs/exit.png')} />
       </TouchableHighlight> 
     </View>

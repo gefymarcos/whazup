@@ -12,8 +12,8 @@ import {
 
 const INITIAL_STATE = {
   nome: '',
-  email: 'fran_lg11@hotmail.com',
-  senha: '123456',
+  email: '',
+  senha: '',
   newUserError: '',
   authError: '',
   authLoading: false,
@@ -33,7 +33,7 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_USER_SUCCESS:
       return { ...state, nome: '', senha: '', userLoading: false, newUserError: '' };
     case AUTH_USER_SUCCESS:
-      return { ...state };
+      return { ...state, ...INITIAL_STATE };
     case AUTH_USER_ERROR:
       return { ...state, authError: action.payload, authLoading: false };
     case LOGIN_INITIATED:
